@@ -17,6 +17,15 @@ authRouter.post("/google/start", (_req: Request, res: Response) => {
   }
 });
 
+authRouter.get("/google/start", (_req: Request, res: Response) => {
+  try {
+    const payload = createGoogleAuthFlow();
+    res.json(payload);
+  } catch (error) {
+    res.status(500).json({ error: (error as Error).message });
+  }
+});
+
 authRouter.get("/google/callback", async (req: Request, res: Response) => {
   const code = typeof req.query.code === "string" ? req.query.code : "";
   const state = typeof req.query.state === "string" ? req.query.state : "";
