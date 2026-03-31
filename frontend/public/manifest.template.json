@@ -1,0 +1,24 @@
+{
+  "manifest_version": 3,
+  "name": "Mailstorm Merge",
+  "version": "0.1.0",
+  "description": "Mail merge for Gmail with CSV, variables, and follow-ups.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "https://mail.google.com/*",
+    "__MAILSTORM_BACKEND_ORIGIN__/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://mail.google.com/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_title": "Mailstorm"
+  }
+}
