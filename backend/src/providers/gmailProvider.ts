@@ -153,13 +153,14 @@ export class GmailProvider implements EmailProvider {
     const messages = thread.data.messages ?? [];
     return messages.map((message: gmail_v1.Schema$Message) => {
       const headers = message.payload?.headers ?? [];
+      const headerDate = findHeader(headers, "Date");
       return {
         id: message.id ?? "",
         threadId: message.threadId ?? undefined,
         from: findHeader(headers, "From"),
         to: findHeader(headers, "To"),
         subject: findHeader(headers, "Subject"),
-        sentAt: findHeader(headers, "Date") || message.internalDate,
+        sentAt: headerDate || message.internalDate || undefined,
         snippet: message.snippet ?? "",
         htmlBody: findPartBody(message.payload)
       };
