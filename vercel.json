@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "site",
   "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/site/index.html" },
